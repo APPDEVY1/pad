@@ -359,7 +359,7 @@ function checkHTTPS() {
 function handlePath() {
   // Default.  Can be overridden in case of static files.
   response.neverCache();
-
+  
   plugins.registerClientHandlerJS();
 
   // these paths are handled identically on all sites/subdomains.
@@ -370,41 +370,42 @@ function handlePath() {
   commonDispatcher.addLocations([
     ['/favicon.ico', forward(static_control)],
     ['/robots.txt', forward(static_control)],
-    ['/crossdomain.xml', forward(static_control)],
+//    ['/crossdomain.xml', forward(static_control)],
     [PrefixMatcher('/static/'), forward(static_control)],
     [PrefixMatcher('/ep/pad/'), forward(pad_control)],
-    [PrefixMatcher('/ep/script/'), forward(scriptcontrol)],
-    [/^\/([^\/]+)$/, pad_control.render_pad],
-    [DirMatcher('/ep/unit-tests/'), forward(testcontrol)],
-    [DirMatcher('/ep/pne-manual/'), forward(pne_manual_control)],
-    [DirMatcher('/ep/pro-help/'), forward(pro_help_control)]
+//    [PrefixMatcher('/ep/script/'), forward(scriptcontrol)],
+    ['/new', pad_control.render_newpad],
+    [/^\/([^\/]+)$/, pad_control.render_pad], // matches pad IDs
+//    [DirMatcher('/ep/unit-tests/'), forward(testcontrol)],
+//    [DirMatcher('/ep/pne-manual/'), forward(pne_manual_control)],
+//    [DirMatcher('/ep/pro-help/'), forward(pro_help_control)]
   ]);
 
   // these paths are main site only
   var mainsiteDispatcher = new Dispatcher();
   mainsiteDispatcher.addLocations([
-    ['/', maincontrol.render_main],
-    [DirMatcher('/ep/beta-account/'), forward(pro_beta_control)],
-    [DirMatcher('/ep/pro-signup/'), forward(pro_signup_control)],
-    [DirMatcher('/ep/about/'), forward(aboutcontrol)],
-    [DirMatcher('/ep/admin/'), forward(admincontrol)],
-    [DirMatcher('/ep/blog/posts/'), blogcontrol.render_post],
-    [DirMatcher('/ep/blog/'), forward(blogcontrol)],
-    [DirMatcher('/ep/connection-diagnostics/'), forward(connection_diagnostics_control)],
-    [DirMatcher('/ep/loadtest/'), forward(loadtestcontrol)],
-    [DirMatcher('/ep/pro-account/'), forward(global_pro_account_control)],
-    [/^\/ep\/pad\/history\/(\w+)\/(.*)$/, historycontrol.render_history],
-    [PrefixMatcher('/ep/pad/slider/'), pad_control.render_slider],
-    [DirMatcher('/ep/store/'), forward(storecontrol)],
-    [PrefixMatcher('/ep/'), forward(maincontrol)]
+//    ['/', maincontrol.render_main],
+//    [DirMatcher('/ep/beta-account/'), forward(pro_beta_control)],
+//    [DirMatcher('/ep/pro-signup/'), forward(pro_signup_control)],
+//    [DirMatcher('/ep/about/'), forward(aboutcontrol)],
+//    [DirMatcher('/ep/admin/'), forward(admincontrol)],
+//    [DirMatcher('/ep/blog/posts/'), blogcontrol.render_post],
+//    [DirMatcher('/ep/blog/'), forward(blogcontrol)],
+//    [DirMatcher('/ep/connection-diagnostics/'), forward(connection_diagnostics_control)],
+//    [DirMatcher('/ep/loadtest/'), forward(loadtestcontrol)],
+//    [DirMatcher('/ep/pro-account/'), forward(global_pro_account_control)],
+//    [/^\/ep\/pad\/history\/(\w+)\/(.*)$/, historycontrol.render_history],
+//    [PrefixMatcher('/ep/pad/slider/'), pad_control.render_slider],
+//    [DirMatcher('/ep/store/'), forward(storecontrol)],
+//    [PrefixMatcher('/ep/'), forward(maincontrol)]
   ]);
 
   // these paths are pro only
-  var proDispatcher = new Dispatcher();
-  proDispatcher.addLocations([
-    ['/', pro_main_control.render_main],
-    [PrefixMatcher('/ep/'), forward(pro_main_control)]
-  ]);
+//  var proDispatcher = new Dispatcher();
+//  proDispatcher.addLocations([
+//    ['/', pro_main_control.render_main],
+//    [PrefixMatcher('/ep/'), forward(pro_main_control)]
+//  ]);
 
   // dispatching logic: first try common, then dispatch to
   // main site or pro.
@@ -414,20 +415,20 @@ function handlePath() {
   }
 
   // Check if there is a pro domain associated with this request.
-  if (isProDomainRequest()) {
-    pro_utils.preDispatchAccountCheck();
-    if (proDispatcher.dispatch()) {
-      return;
-    }
-  } else {
+//  if (isProDomainRequest()) {
+//    pro_utils.preDispatchAccountCheck();
+//    if (proDispatcher.dispatch()) {
+//      return;
+//    }
+//  } else {
     if (mainsiteDispatcher.dispatch()) {
       return;
     }
-  }
+//  }
 
-  if (!isProDomainRequest()) {
-    legacy_urls.checkPath();
-  }
+//  if (!isProDomainRequest()) {
+//    legacy_urls.checkPath();
+//  }
 
   render404();
 }

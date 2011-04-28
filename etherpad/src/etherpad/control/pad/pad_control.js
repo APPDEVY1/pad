@@ -225,6 +225,7 @@ function _createIfNecessary(localPadId, pad) {
     delete getSession().instantCreate;
     return;
   }
+
   // make sure localPadId is valid.
   var validPadId = padutils.makeValidLocalPadId(localPadId);
   if (localPadId != validPadId) {
@@ -389,6 +390,9 @@ function render_pad(localPadId) {
 }
 
 function render_create_get() {
+  render404();
+  return;
+
   var padId = request.params.padId;
   // <RAFTER>
   var template = (DISABLE_PAD_CREATION && ! pro_utils.isProDomainRequest()) ?
