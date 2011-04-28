@@ -393,6 +393,7 @@ function render_create_get() {
   render404();
   return;
 
+  /*
   var padId = request.params.padId;
   // <RAFTER>
   var template = (DISABLE_PAD_CREATION && ! pro_utils.isProDomainRequest()) ?
@@ -404,6 +405,7 @@ function render_create_get() {
     bodyClass: 'nonpropad',
     padId: padId,
     fullSuperdomain: pro_utils.getFullSuperdomainHost()});
+  */
 }
 
 function render_create_post() {
