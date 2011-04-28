@@ -3133,6 +3133,13 @@ function OUTER(gscope) {
           doDeleteKey();
 	  specialHandled = true;
 	}
+	if ((!specialHandled) && isTypeForCmdKey &&
+	    String.fromCharCode(which).toLowerCase() == "s" &&
+	    (evt.metaKey ||  evt.ctrlKey)) {
+	  // cmd-S (save)
+	  evt.preventDefault();
+	  specialHandled = true;
+	}
 
 	if (mozillaFakeArrows && mozillaFakeArrows.handleKeyEvent(evt)) {
 	  evt.preventDefault();
