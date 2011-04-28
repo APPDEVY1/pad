@@ -68,11 +68,11 @@ var padeditor = (function(){
       self.ace.setProperty("showslinenumbers", v);
       padutils.setCheckbox($("#options-linenoscheck"), v);
 
-      v = getOption('showAuthorColors', true);
+      v = getOption('showAuthorColors', false);
       self.ace.setProperty("showsauthorcolors", v);
       padutils.setCheckbox($("#options-colorscheck"), v);
 
-      v = getOption('useMonospaceFont', false);
+      v = getOption('useMonospaceFont', true);
       self.ace.setProperty("textface",
                            (v ? "monospace" : "Arial, sans-serif"));
       $("#viewfontmenu").val(v ? "monospace" : "normal");

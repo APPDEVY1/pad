@@ -26,4 +26,5 @@ debian/files
 etherpad/src/plugins/fileUpload/upload
 build-stamp
 infrastructure/lib/mysql-*.jar
-.DS_Store
+.DS_Storeinfrastructure/scala-2.7.4/var/scala-devel/output-redirects/
+infrastructure/scala-2.7.4/var/

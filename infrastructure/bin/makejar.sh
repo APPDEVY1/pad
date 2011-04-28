@@ -20,8 +20,6 @@ else
     echo "using JAR $JAR..."
 fi
 
-cp ${MYSQL_CONNECTOR_JAR} lib/
-
 source bin/compilecache.sh
 
 if [ "$1" == "clearcache" ]; then
