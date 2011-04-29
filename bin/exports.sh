@@ -27,6 +27,7 @@
 
 [ -e "/usr/lib/jvm/java-6-openjdk" ] && export JAVA_HOME="/usr/lib/jvm/java-6-openjdk"
 [ -e "/usr/lib/jvm/java-6-sun" ] && export JAVA_HOME="/usr/lib/jvm/java-6-sun"
+[ -e "/usr/java/jdk1.6.0_22" ] && export JAVA_HOME="/usr/java/jdk1.6.0_22"
 [ -e "/usr/lib/jvm/java-6-openjdk" ] && export JAVA_OPTS="-Xbootclasspath/p:../infrastructure/lib/rhino-js-1.7r1.jar:/usr/share/java/scala-library.jar" 
 export SCALA_HOME="`pwd`/infrastructure/scala-2.7.4"
 export SCALA_LIBRARY_JAR="$SCALA_HOME/lib/scala-library.jar"
