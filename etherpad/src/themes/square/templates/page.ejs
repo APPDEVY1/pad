@@ -133,14 +133,11 @@ limitations under the License. */ %>
 
   </div><!-- /padpage -->
 
+
 <!-- Added by Square -->
-  <div style="position: fixed; bottom: 0; right: 0; margin: 10px;">
-    <img src="/static/img/square/square.png" width="130" height="34">
-  </div>
-  
-  <div style="position: fixed; top: 0; right: 0; margin: 10px;">
-    <a style="text-decoration: none; color: #999999;" href="/ep/pad/export/<%= localPadId %>/latest?format=txt">txt</a>
-  </div>
+  <script>
+    padId = '<%= localPadId %>';
+  </script>
 <!-- /Added by Square -->
 
   <%: template.use('modals'); %>

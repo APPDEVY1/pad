@@ -39,5 +39,23 @@ limitations under the License. */ %><!DOCTYPE html PUBLIC
 <%= helpers.jsIncludes() %>
 <%= helpers.googleAnalytics() %>
 
+<!-- Added by Square -->
+  <script>
+    $(document).ready(function() {
+      editorWindow = padeditor.ace.getFrame().contentWindow;
+      $(editorWindow).load(function() {
+        var div = editorWindow.document.getElementById("overlaysdiv");
+        div.innerHTML = '<div style="position: fixed; bottom: 0; right: 0; margin: 10px;">'
+          + '<img src="/static/img/square/square.png" width="130" height="34">'
+          + '</div>'
+          + '<div style="position: fixed; top: 0; right: 0; margin: 10px;">'
+          + '<a style="text-decoration: none; color: #999999; font-family: sans-serif;'
+          + ' font-size: 10pt" href="/ep/pad/export/' + padId + '/latest?format=txt">txt</a>'
+          + '</div>';
+      });
+    });
+  </script>
+<!-- /Added by Square -->
+
   </body>
 </html>
