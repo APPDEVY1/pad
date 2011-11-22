@@ -376,6 +376,11 @@ function randomString(nchars) {
   return result;
 }
 
+function randomNumber(nchars) {
+  var result = _jrand.nextInt((10 ** nchars) - 1 );
+  return result.toString();
+}
+
 function md5(x) {
   return net.appjet.ajstdlib.md5.md5(x);
 }
