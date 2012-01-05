@@ -1,5 +1,8 @@
 ETHERPAD_ROOT="$(cd $(dirname "$0"); pwd)/../../../../"
-. "$ETHERPAD_ROOT/bin/exports.sh"
+
+cd $ETHERPAD_ROOT
+. ./bin/exports.sh
+cd -
 
 (
   mkdir -p ../.extdeps
