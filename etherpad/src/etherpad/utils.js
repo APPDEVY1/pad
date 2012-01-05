@@ -48,9 +48,9 @@ jimport("java.io.File");
 
 // returns globally-unique padId
 function randomUniquePadId() {
-  var id = stringutils.randomString(10);
+  var id = stringutils.randomNumber(7);
   while (model.accessPadGlobal(id, function(p) { return p.exists(); }, "r")) {
-    id = stringutils.randomString(10);
+    id = stringutils.randomNumber(7);
   }
   return id;
 }

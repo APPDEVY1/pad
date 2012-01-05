@@ -241,13 +241,9 @@ function _createIfNecessary(localPadId, pad) {
     }
   }
   // </RAFTER>
-  // tokbox may use createImmediately
-  if (request.params.createImmediately || getSession().instantCreate == localPadId) {
-    pad.create(getDefaultPadText());
-    delete getSession().instantCreate;
-    return;
-  }
-  response.redirect("/ep/pad/create?padId="+encodeURIComponent(localPadId));
+    
+  pad.create(getDefaultPadText());
+  delete getSession().instantCreate;
 }
 
 function _promptForMobileDevices(pad) {

@@ -20,7 +20,7 @@ function OUTER(gscope) {
 
   var isSetUp = false;
 
-  var THE_TAB = '    ';//4
+  var THE_TAB = '  '; // 2 spaces
   var MAX_LIST_LEVEL = 8;
 
   var LINE_NUMBER_PADDING_RIGHT = 4;
