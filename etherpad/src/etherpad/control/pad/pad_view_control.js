@@ -84,7 +84,7 @@ function onRequest() {
     var getAdaptiveChangesetsArray = function(array, start, granularity) {
       array = array || [];
       start = start || 0;
-      granularity = granularity || Math.pow(10, Math.floor(Math.log(totalRevs+1) / Math.log(10)));
+      granularity = granularity || 1000;
       var changeset = _add(getChangesetInfo(localPadId, start, totalRevs+1, granularity), {
         start: start,
         granularity: Math.floor(granularity)
@@ -169,7 +169,7 @@ function onRequest() {
     var isPro = isProDomainRequest();
     var isProUser = (isPro && ! padusers.isGuest(userId));
 
-    var bodyClass = ["limwidth",
+    var bodyClass = ["timeslider", "limwidth",
                      (isPro ? "propad" : "nonpropad"),
                      (isProUser ? "prouser" : "nonprouser")].join(" ");
 

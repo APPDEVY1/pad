@@ -55,4 +55,3 @@ if ! [ -e "$SCALA" ]; then
         echo "Scala cannot be found '$SCALA' not found - Download it here: http://www.scala-lang.org/"
         exit 1
 fi
-

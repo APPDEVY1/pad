@@ -28,6 +28,8 @@ import("etherpad.pad.padutils");
 import("etherpad.pad.dbwriter");
 import("etherpad.pad.pad_migrations");
 import("etherpad.pad.pad_security");
+import("etherpad.pro.pro_utils");
+import("etherpad.pro.pro_config");
 import("etherpad.collab.collab_server");
 import("cache_utils.syncedWithCache");
 import("etherpad.admin.plugins");
@@ -227,8 +229,26 @@ function accessPadGlobal(padId, padFunc, rwMode) {
           meta.status.dirty = true;
           meta.supportsTimeSlider = true;
 
-	  var firstChangeset = Changeset.makeSplice("\n", 0, 0,
-	    cleanText(optText || ''));
+	  var firstChangeset;
+	  if (typeof(optText) == "string") {
+	    firstChangeset = Changeset.makeSplice("\n", 0, 0, optText, [], pad.pool());
+	  } else if (optText.padId !== undefined) {
+	    var cloneData = accessPadGlobal(optText.padId, function(pad) {
+	      var cloneRevNum = pad.getHeadRevisionNumber();
+	      return {
+		'padText':pad.getRevisionText(cloneRevNum),
+		'padAText': pad.getInternalRevisionAText(cloneRevNum),
+		'pool': pad.pool()
+	      };
+	    }, 'r');
+	    var pool = pad.pool();
+	    pool.fromJsonable(cloneData.pool.toJsonable());
+	    var assem = Changeset.smartOpAssembler();
+	    Changeset.appendATextToAssembler(cloneData.padAText, assem);
+	    assem.endDocument();
+	    firstChangeset = Changeset.pack(1, cloneData.padText.length + 1, assem.toString(), cloneData.padText);
+	  }
+
 	  addRevision(firstChangeset, '');
 
 	  _insertPadMetaData(padId, meta);
@@ -362,7 +382,7 @@ function accessPadGlobal(padId, padFunc, rwMode) {
           }
           if ((! data.padOptions.guestPolicy) ||
             (data.padOptions.guestPolicy == 'ask')) {
-            data.padOptions.guestPolicy = 'deny';
+            data.padOptions.guestPolicy = (pro_utils.isProDomainRequest() && pro_config.getConfig().openByGuestsAllowed ? 'allow' : 'deny');
           }
           return data.padOptions;
         },

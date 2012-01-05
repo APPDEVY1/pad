@@ -1,4 +1,6 @@
 *~
+\#*#
+.#*
 etherpad/etc/etherpad.local.properties
 etherpad/src/etherpad/collab/ace/contentcollector.js
 etherpad/src/etherpad/collab/ace/domline.js
@@ -24,5 +26,8 @@ debian/etherpad
 debian/files
 etherpad/src/plugins/fileUpload/upload
 build-stamp
-.DS_Storeinfrastructure/scala-2.7.4/var/scala-devel/output-redirects/
+.DS_Store
 infrastructure/scala-2.7.4/var/
+infrastructure/lib/mysql-*.jar
+etherpad/src/static/favicon.ico
+etherpad/src/static/robots.txt
